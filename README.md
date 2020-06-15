@@ -21,20 +21,20 @@ oc apply -f https://storage.googleapis.com/tekton-releases/triggers/latest/relea
 
 ## Setup
 1.  `oc project knativetutorial`
-2.  Create build pipeline
-```
-oc apply -f ./weather-service-build.yaml
-```
-3.  Create resources
+2.  Create resources
 ```
 oc apply -f ./resources/git-repo.yaml
 oc apply -f ./resources/image.yaml
 ```
-4.  Create tasks
+3.  Create tasks
 ```
 oc apply -f ./tasks/deploy-using-kubectl.yaml
 ```
-5.  Update ./trigger/webhook_secret.yaml with the github info
+4.  Create build pipeline
+```
+oc apply -f ./weather-service-build.yaml
+```
+5.  Update `./trigger/webhook_secret.yaml` with the github info
 6.  Create trigger resources
 ```
 oc apply -f ./trigger/trigger_template.yaml
