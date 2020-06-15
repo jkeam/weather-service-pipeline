@@ -1,0 +1,51 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: weather-service-pipeline
+  namespace: knativetutorial
+spec:
+  params:
+    - default: weather-service
+      description: Name of the deployment
+      name: deployment-name
+      type: string
+  resources:
+    - name: git-repo
+      type: git
+    - name: image
+      type: image
+  tasks:
+    - name: build-image
+      params:
+        - name: TLSVERIFY
+          value: 'false'
+        - name: DOCKERFILE
+          value: ./src/main/docker/Dockerfile.build
+      resources:
+        inputs:
+          - name: source
+            resource: git-repo
+        outputs:
+          - name: image
+            resource: image
+      taskRef:
+        kind: ClusterTask
+        name: buildah
+    - name: deploy-to-cluster
+      params:
+        - name: pathToYamlFile
+          value: knative/service.yaml
+        - name: imageUrl
+          value: >-
+            image-registry.openshift-image-registry.svc:5000/knativetutorial/weather-service
+        - name: imageTag
+          value: latest
+      resources:
+        inputs:
+          - name: git-source
+            resource: git-repo
+      runAfter:
+        - build-image
+      taskRef:
+        kind: Task
+        name: deploy-using-kubectl

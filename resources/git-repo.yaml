@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: git-repo
+  namespace: knativetutorial
+spec:
+  params:
+    - name: url
+      value: 'http://github.com/jkeam/weather-service.git'
+  type: git
+

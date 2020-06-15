@@ -1,0 +1,12 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: weather-service-listener
+  namespace: knativetutorial
+spec:
+  serviceAccountName: tekton-triggers-sa
+  triggers:
+  - bindings:
+    - name: weather-service-pipelinebinding
+    template:
+      name: weather-service-triggertemplate

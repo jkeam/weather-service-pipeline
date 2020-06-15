@@ -1,0 +1,56 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: weather-service-triggertemplate
+spec:
+  params:
+  - name: gitrevision
+    description: The git revision
+    default: master
+  - name: gitrepositoryurl
+    description: The git repository url
+  - name: namespace
+    description: The namespace to create the resources
+  - name: gitrepositoryname
+    description: The name of the deployment to be created / patched
+  resourcetemplates:
+  - apiVersion: tekton.dev/v1alpha1
+    kind: PipelineResource
+    metadata:
+      name: source-repo-$(params.gitrepositoryname)-$(uid)
+      namespace: $(params.namespace)
+    spec:
+      type: git
+      params:
+      - name: revision
+        value: $(params.gitrevision)
+      - name: url
+        value: $(params.gitrepositoryurl)
+  - apiVersion: tekton.dev/v1alpha1
+    kind: PipelineResource
+    metadata:
+      name: image-source-$(params.gitrepositoryname)-$(uid)
+      namespace: $(params.namespace)
+    spec:
+      type: image
+      params:
+      - name: url
+        value: image-registry.openshift-image-registry.svc:5000/knativetutorial/$(params.gitrepositoryname):latest
+  - apiVersion: tekton.dev/v1alpha1
+    kind: PipelineRun
+    metadata:
+      name: weather-service-$(params.gitrepositoryname)-$(uid)
+      namespace: $(params.namespace)
+    spec:
+      pipelineRef:
+        name: weather-service-pipeline
+      resources:
+      - name: git-repo
+        resourceRef:
+          name: source-repo-$(params.gitrepositoryname)-$(uid)
+      - name: image
+        resourceRef:
+          name: image-source-$(params.gitrepositoryname)-$(uid)
+      params:
+      - name: deployment-name
+        value: $(params.gitrepositoryname)
