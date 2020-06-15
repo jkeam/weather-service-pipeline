@@ -39,7 +39,7 @@ spec:
   - apiVersion: tekton.dev/v1alpha1
     kind: PipelineRun
     metadata:
-      name: weather-service-$(params.gitrepositoryname)-$(uid)
+      name: $(params.gitrepositoryname)-$(uid)
       namespace: $(params.namespace)
     spec:
       pipelineRef:
