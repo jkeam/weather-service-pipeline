@@ -42,6 +42,10 @@ oc apply -f ./trigger/trigger_binding.yaml
 oc apply -f ./trigger/trigger_role.yaml
 oc apply -f ./trigger/trigger_listener.yaml
 oc apply -f ./trigger/trigger_route.yaml
-oc apply -f ./trigger/webhook_secret.yaml
 ```
-7.  Double check the route that was created and use that as the webhook from the `Github Setup` instructions above
+7.  Apply secrets
+```
+oc apply -f ./secrets/webhook_secret.yaml
+oc apply -f ./secrets/weather_token_secret.yaml
+```
+8.  Double check the route that was created and use that as the webhook from the `Github Setup` instructions above

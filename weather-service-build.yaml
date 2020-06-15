@@ -36,8 +36,7 @@ spec:
         - name: pathToYamlFile
           value: knative/service.yaml
         - name: imageUrl
-          value: >-
-            image-registry.openshift-image-registry.svc:5000/knativetutorial/weather-service
+          value: image-registry.openshift-image-registry.svc:5000/knativetutorial/weather-service
         - name: imageTag
           value: latest
       resources:
