@@ -3,7 +3,8 @@ This contains all the resources necessary to set up a pipeline that listens to w
 
 
 ## Prerequisite
-1.  oc 4.4 (and logged into your cluster)
+1.  ocp 4.4 with Tekton and Knative operators installed
+2.  oc 4.4 cli (and logged into your cluster)
 
 
 ## Tekton Installation
