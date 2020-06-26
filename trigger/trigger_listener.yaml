@@ -6,7 +6,17 @@ metadata:
 spec:
   serviceAccountName: tekton-triggers-sa
   triggers:
-  - bindings:
-    - name: weather-service-pipelinebinding
-    template:
-      name: weather-service-triggertemplate
+    - name: github-listener
+      interceptors:
+        - github:
+            secretRef:
+              secretName: webhook-secret
+              secretKey: secret
+            eventTypes:
+              - pull_request
+              - push
+      bindings:
+        - name: weather-service-pipelinebinding
+          ref: weather-service-pipelinebinding
+      template:
+        name: weather-service-triggertemplate

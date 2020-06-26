@@ -5,12 +5,17 @@ This contains all the resources necessary to set up a pipeline that listens to w
 ## Prerequisite
 1.  ocp 4.4 with Tekton and Knative operators installed
 2.  oc 4.4 cli (and logged into your cluster)
+3.  For this pipeline, we are assuming you are using the [weather service project](https://github.com/jkeam/weather-service)
 
 
 ## Tekton Installation
 ```
 oc new-project tekton-pipelines
+oc adm policy add-scc-to-user anyuid -z tekton-pipelines-controller
+oc apply -f https://storage.googleapis.com/tekton-releases/pipeline/latest/release.notags.yaml
 oc apply -f https://storage.googleapis.com/tekton-releases/triggers/latest/release.yaml
+# to verify
+oc get pods --namespace tekton-pipelines --watch
 ```
 
 
@@ -40,7 +45,6 @@ oc apply -f ./weather-service-build.yaml
 oc apply -f ./trigger/trigger_template.yaml
 oc apply -f ./trigger/trigger_binding.yaml
 oc apply -f ./trigger/trigger_role.yaml
-# ignore any validation errors after creating the listener below
 oc apply -f ./trigger/trigger_listener.yaml
 oc apply -f ./trigger/trigger_route.yaml
 ```

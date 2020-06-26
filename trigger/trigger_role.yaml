@@ -2,7 +2,7 @@
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: tekton-triggers-sa
+  name: tekton-triggers-role
   namespace: knativetutorial
 rules:
 - apiGroups:
@@ -18,12 +18,15 @@ rules:
   resources:
   - pipelineruns
   - pipelineresources
+  - taskruns
   verbs:
   - create
 - apiGroups:
   - ""
   resources:
   - configmaps
+  - secrets
+  - serviceaccounts
   verbs:
   - get
   - list
@@ -46,4 +49,4 @@ subjects:
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: tekton-triggers-sa
+  name: tekton-triggers-role
