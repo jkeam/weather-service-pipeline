@@ -15,8 +15,8 @@ oc apply -f https://storage.googleapis.com/tekton-releases/triggers/latest/relea
 
 
 ## Github Setup
-1.  Go to github and go to Settings -> Personal access tokens -> Generate new token with `public_repo` permission
-2.  Go to your project and enable a webhook, url defined below.
+1.  Go to github and go to Settings -> Developer Settings -> Personal access tokens -> Generate new token with `repo -> public_repo` permission
+2.  Go to your project and enable a webhook, url defined below in step 8.
 
 
 ## Setup
@@ -40,6 +40,7 @@ oc apply -f ./weather-service-build.yaml
 oc apply -f ./trigger/trigger_template.yaml
 oc apply -f ./trigger/trigger_binding.yaml
 oc apply -f ./trigger/trigger_role.yaml
+# ignore any validation errors after creating the listener below
 oc apply -f ./trigger/trigger_listener.yaml
 oc apply -f ./trigger/trigger_route.yaml
 ```
