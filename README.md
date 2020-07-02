@@ -39,7 +39,7 @@ oc apply -f ./tasks/deploy-using-kubectl.yaml
 ```
 oc apply -f ./weather-service-build.yaml
 ```
-5.  Update `./trigger/webhook_secret.yaml` with the github info
+5.  Update `./secrets/webhook_secret.yaml` with the github info
 6.  Create trigger resources
 ```
 oc apply -f ./trigger/trigger_template.yaml
