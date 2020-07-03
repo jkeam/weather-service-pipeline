@@ -33,6 +33,7 @@ oc apply -f ./resources/image.yaml
 ```
 3.  Create tasks
 ```
+oc apply -f ./tasks/apply-manifests.yaml
 oc apply -f ./tasks/deploy-using-kubectl.yaml
 ```
 4.  Create build pipeline

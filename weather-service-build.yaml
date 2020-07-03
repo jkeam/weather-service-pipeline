@@ -31,6 +31,15 @@ spec:
       taskRef:
         kind: ClusterTask
         name: buildah
+    - name: apply-manifests
+      taskRef:
+        name: apply-manifests
+      resources:
+        inputs:
+          - name: source
+            resource: git-repo
+      runAfter:
+        - build-image
     - name: deploy-to-cluster
       params:
         - name: pathToYamlFile
@@ -44,7 +53,7 @@ spec:
           - name: git-source
             resource: git-repo
       runAfter:
-        - build-image
+        - apply-manifests
       taskRef:
         kind: Task
         name: deploy-using-kubectl
