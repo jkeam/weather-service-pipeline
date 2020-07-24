@@ -6,6 +6,5 @@ metadata:
 spec:
   params:
     - name: url
-      value: image-registry.openshift-image-registry.svc:5000/knativetutorial/weather-service:latest
+      value: quay.io/jkeam/weather-service:latest
   type: image
-

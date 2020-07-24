@@ -29,8 +29,8 @@ spec:
           - name: image
             resource: image
       taskRef:
-        kind: ClusterTask
-        name: buildah
+        kind: Task
+        name: mybuildah
     - name: apply-manifests
       taskRef:
         name: apply-manifests
@@ -45,7 +45,7 @@ spec:
         - name: pathToYamlFile
           value: knative/service.yaml
         - name: imageUrl
-          value: image-registry.openshift-image-registry.svc:5000/knativetutorial/weather-service
+          value: quay.io/jkeam/weather-service
         - name: imageTag
           value: latest
       resources:

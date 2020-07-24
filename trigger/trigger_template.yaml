@@ -35,7 +35,7 @@ spec:
       type: image
       params:
       - name: url
-        value: image-registry.openshift-image-registry.svc:5000/knativetutorial/$(params.gitrepositoryname):latest
+        value: quay.io/jkeam/weather-service:latest
   - apiVersion: tekton.dev/v1alpha1
     kind: PipelineRun
     metadata:
