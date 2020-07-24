@@ -1,5 +1,5 @@
 # Weather Service Pipeline
-This contains all the resources necessary to set up a pipeline that listens to webhook pushes from github.  In these instructions, the project name is assumed to be `knativetutorial`.  To change it to your project, double check each `yaml` file and update all references to this project name.
+This contains all the resources necessary to set up a pipeline that listens to webhook pushes from github.  In these instructions, the project name is assumed to be `knativetutorial`.  To change it to your project, double check each `yaml` file and update all references to this project name.  Also update `mybuildah.yaml` with your quay username and password.
 
 
 ## Prerequisite
@@ -20,8 +20,7 @@ oc get pods --namespace tekton-pipelines --watch
 
 
 ## Github Setup
-1.  Go to github and go to Settings -> Developer Settings -> Personal access tokens -> Generate new token with `repo -> public_repo` permission
-2.  Go to your project and enable a webhook, url defined below in step 8.
+1.  Go to your project and enable a webhook, url defined below in step 8.
 
 
 ## Setup
